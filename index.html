@@ -1,595 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="index.css">
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Shopping Website</title>
-    <style>
-      /* Existing styles remain unchanged */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      header {
-        background-color: #2874f0;
-        color: white;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      header .logo {
-        font-size: 24px;
-        font-weight: bold;
-      }
-      header .search-bar {
-        flex: 1;
-        margin: 0 20px;
-      }
-      header .search-bar input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 4px;
-        border: 1px solid #ddd;
-      }
-      header .cart-login {
-        display: flex;
-        gap: 15px;
-        align-items: center;
-      }
-      header .cart,
-      header .wishlist {
-        font-size: 18px;
-        cursor: pointer;
-        position: relative;
-      }
-      header .cart span,
-      header .wishlist span {
-        background-color: red;
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-        border-radius: 50%;
-        padding: 2px 6px;
-        position: absolute;
-        top: -5px;
-        right: -10px;
-      }
-      header .login {
-        font-size: 18px;
-        cursor: pointer;
-        background-color: #fff;
-        color: #2874f0;
-        padding: 5px 10px;
-        border: 1px solid #fff;
-        border-radius: 4px;
-        transition: background-color 0.3s, color 0.3s;
-      }
-      header .login:hover {
-        background-color: #2874f0;
-        color: #fff;
-      }
-      nav {
-        background-color: #f8f8f8;
-        padding: 10px;
-        text-align: center;
-      }
-      nav a {
-        margin: 0 15px;
-        text-decoration: none;
-        color: #333;
-        cursor: pointer;
-      }
-      nav a:hover {
-        color: #2874f0;
-      }
-      footer {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 10px;
-      }
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-        align-items: center;
-      }
-      .modal-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        width: 400px;
-        max-height: 80%;
-        overflow-y: auto;
-        text-align: center;
-      }
-      .modal-content ul {
-        list-style: none;
-        padding: 0;
-      }
-      .modal-content ul li {
-        text-align: left;
-        margin: 10px 0;
-      }
-      .close {
-        float: right;
-        font-size: 20px;
-        cursor: pointer;
-        color: #333;
-      }
-      .close:hover {
-        color: red;
-      }
-      /* New styles for the signup modal */
-      .signup-modal-content,
-      .edit-modal-content {
-        width: 400px;
-        padding: 20px;
-        text-align: left;
-        background-color: #f0f4f8;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      .signup-modal-content input,
-      .edit-modal-content input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 4px;
-        border: 1px solid #ddd;
-      }
-      .signup-modal-content button,
-      .edit-modal-content button {
-        width: 100%;
-        padding: 10px;
-        background-color: #2874f0;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .signup-modal-content button:hover,
-      .edit-modal-content button:hover {
-        background-color: #1a5fbf;
-      }
-      /* Order History & Tracking Section */
-      .order-history-modal-content {
-        background-color: #f9f9f9;
-        padding: 20px;
-        width: 500px;
-        max-height: 80%;
-        overflow-y: auto;
-      }
-      .order-history-modal-content ul {
-        list-style: none;
-        padding: 0;
-      }
-      .order-history-modal-content ul li {
-        border-bottom: 1px solid #ddd;
-        padding: 10px 0;
-      }
-      .order-history-modal-content h2 {
-        margin-bottom: 20px;
-        font-size: 24px;
-        text-align: center;
-      }
-      .order-history-modal-content .order-status {
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
-      }
-      #product-list {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 3 equal columns */
-        grid-gap: 25px; /* Space between items */
-        justify-items: center; /* Center products in each grid item */
-        padding: 10px;
-      }
-
-      .product {
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
-        width: 100%;
-      }
-
-      .product img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-      }
-    </style>
   </head>
-  <body>
-    <header>
-      <div class="logo">ShopPlusPlus</div>
-      <div class="search-bar">
-        <input
-          type="text"
-          placeholder="Search for products, brands, and more"
-        />
+</head>
+<body>
+  <header>
+    <div class="logo">ShopPlusPlus</div>
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search for products, brands, and more"
+      />
+    </div>
+    <div class="cart-login">
+      <div class="cart" onclick="toggleCartModal()">
+        🛒 Cart <span id="cart-count">0</span>
       </div>
-      <div class="cart-login">
-        <div class="cart" onclick="toggleCartModal()">
-          🛒 Cart <span id="cart-count">0</span>
-        </div>
-        <div class="wishlist" onclick="toggleWishlistModal()">
-          ❤️ Wishlist <span id="wishlist-count">0</span>
-        </div>
-        <div class="login" onclick="openLoginModal()">Login</div>
-        <div class="order-history" onclick="toggleOrderHistoryModal()">
-          Order History & Tracking
-        </div>
+      <div class="wishlist" onclick="toggleWishlistModal()">
+        ❤️ Wishlist <span id="wishlist-count">0</span>
       </div>
-    </header>
-    <nav>
-      <a onclick="showContent('home')">Home</a>
-      <a onclick="showContent('electronics')">Electronics</a>
-      <a onclick="showContent('fashion')">Fashion</a>
-      <a onclick="showContent('groceries')">Groceries</a>
-      <a onclick="showContent('about')">About</a>
-    </nav>
-    <section id="main-content">
-      <div class="content" id="products-content">
-        <h2>Products</h2>
-        <div class="products" id="product-list">
-          <!-- Products will be displayed here dynamically based on category -->
-        </div>
-      </div>
-    </section>
-    <footer>
-      <p>&copy; 2024 ShopPlusPlus. All rights reserved.</p>
-    </footer>
-
-    <!-- Cart Modal -->
-    <div class="modal" id="cart-modal">
-      <div class="modal-content">
-        <span class="close" onclick="toggleCartModal()">&times;</span>
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul>
-        <div id="cart-total">Total: ₹0</div>
-        <button onclick="openPaymentModal()">Proceed to Payment</button>
+      <div class="login" onclick="openLoginModal()">Login</div>
+      <div class="order-history" onclick="toggleOrderHistoryModal()">
+        Order History & Tracking
       </div>
     </div>
-
-    <!-- Wishlist Modal -->
-    <div class="modal" id="wishlist-modal">
-      <div class="modal-content">
-        <span class="close" onclick="toggleWishlistModal()">&times;</span>
-        <h2>Your Wishlist</h2>
-        <ul id="wishlist-items"></ul>
+  </header>
+  <nav>
+    <a onclick="showContent('home')">Home</a>
+    <a onclick="showContent('electronics')">Electronics</a>
+    <a onclick="showContent('fashion')">Fashion</a>
+    <a onclick="showContent('groceries')">Groceries</a>
+    <a onclick="showContent('about')">About</a>
+  </nav>
+  <section id="main-content">
+    <div class="content" id="products-content">
+      <h2>Products</h2>
+      <div class="products" id="product-list">
+        <!-- Products will be displayed here dynamically based on category -->
       </div>
     </div>
+  </section>
+  <footer>
+    <p>&copy; 2024 ShopPlusPlus. All rights reserved.</p>
+  </footer>
 
-    <!-- Order History & Tracking Modal -->
-    <div class="modal" id="order-history-modal">
-      <div class="order-history-modal-content">
-        <span class="close" onclick="toggleOrderHistoryModal()">&times;</span>
-        <h2>Order History & Tracking</h2>
-        <ul id="order-history-list">
-          <!-- Order history will be displayed here dynamically -->
-        </ul>
-      </div>
+  <!-- Cart Modal -->
+  <div class="modal" id="cart-modal">
+    <div class="modal-content">
+      <span class="close" onclick="toggleCartModal()">&times;</span>
+      <h2>Your Cart</h2>
+      <ul id="cart-items"></ul>
+      <div id="cart-total">Total: ₹0</div>
+      <button onclick="openPaymentModal()">Proceed to Payment</button>
     </div>
+  </div>
 
-    <!-- Payment Modal -->
-    <div class="modal" id="payment-modal">
-      <div class="payment-modal-content">
-        <span class="close" onclick="togglePaymentModal()">&times;</span>
-        <h2>Choose Payment Method</h2>
-        <select id="payment-method">
-          <option value="cash">Cash on Delivery</option>
-          <option value="upi">UPI</option>
-          <option value="card">Credit/Debit Card</option>
-        </select>
-        <button onclick="processPayment()">Pay Now</button>
-      </div>
+  <!-- Wishlist Modal -->
+  <div class="modal" id="wishlist-modal">
+    <div class="modal-content">
+      <span class="close" onclick="toggleWishlistModal()">&times;</span>
+      <h2>Your Wishlist</h2>
+      <ul id="wishlist-items"></ul>
     </div>
+  </div>
 
-    <!-- Login Modal -->
-    <div class="modal" id="login-modal">
-      <div class="login-modal-content">
-        <span class="close" onclick="toggleLoginModal()">&times;</span>
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username" />
-        <input type="text" id="login-email" placeholder="Email" />
-        <input type="text" id="login-phone" placeholder="Phone Number" />
-        <input type="password" id="password" placeholder="Password" />
-        <button onclick="login()">Login</button>
-        <button onclick="openSignupModal()">Sign Up</button>
-      </div>
+  <!-- Order History & Tracking Modal -->
+  <div class="modal" id="order-history-modal">
+    <div class="order-history-modal-content">
+      <span class="close" onclick="toggleOrderHistoryModal()">&times;</span>
+      <h2>Order History & Tracking</h2>
+      <ul id="order-history-list">
+        <!-- Order history will be displayed here dynamically -->
+      </ul>
     </div>
+  </div>
 
-    <!-- Signup Modal -->
-    <div class="modal" id="signup-modal">
-      <div class="signup-modal-content">
-        <span class="close" onclick="toggleSignupModal()">&times;</span>
-        <h2>Sign Up</h2>
-        <input type="text" id="signup-username" placeholder="Username" />
-        <input type="email" id="signup-email" placeholder="Email" />
-        <input type="text" id="signup-phone" placeholder="Phone Number" />
-        <input type="password" id="signup-password" placeholder="Password" />
-        <button onclick="signup()">Sign Up</button>
-      </div>
+  <!-- Payment Modal -->
+  <div class="modal" id="payment-modal">
+    <div class="payment-modal-content">
+      <span class="close" onclick="togglePaymentModal()">&times;</span>
+      <h2>Choose Payment Method</h2>
+      <select id="payment-method">
+        <option value="cash">Cash on Delivery</option>
+        <option value="upi">UPI</option>
+        <option value="card">Credit/Debit Card</option>
+      </select>
+      <button onclick="processPayment()">Pay Now</button>
     </div>
+  </div>
 
-    <script>
-      let cart = [];
-      let wishlist = [];
-      let orders = [
-        {
-          orderId: "12345",
-          date: "2024-12-01",
-          status: "Processing",
-        },
-        {
-          orderId: "12346",
-          date: "2024-12-05",
-          status: "Shipped",
-        },
-        {
-          orderId: "12347",
-          date: "2024-12-07",
-          status: "Delivered",
-        },
-      ];
-      let isLoggedIn = false;
-      let userInfo = { username: "", email: "", phone: "" };
+  <!-- Login Modal -->
+  <div class="modal" id="login-modal">
+    <div class="login-modal-content">
+      <span class="close" onclick="toggleLoginModal()">&times;</span>
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="text" id="login-email" placeholder="Email" />
+      <input type="text" id="login-phone" placeholder="Phone Number" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <button onclick="openSignupModal()">Sign Up</button>
+    </div>
+  </div>
 
-      function showContent(category) {
-        const productList = document.getElementById("product-list");
-        productList.innerHTML = "";
-
-        let products = [];
-        if (category === "home") {
-          products = [
-            { name: "Home Product 1", price: 499 },
-            { name: "Home Product 2", price: 799 },
-            { name: "Home Product 3", price: 999 },
-            { name: "Home Product 4", price: 1299 },
-            { name: "Home Product 5", price: 499 },
-            { name: "Home Product 6", price: 799 },
-            { name: "Home Product 7", price: 999 },
-            { name: "Home Product 8", price: 1299 },
-            { name: "Home Product 9", price: 1299 },
-            { name: "Home Product 10", price: 999 },
-            { name: "Home Product 11", price: 1299 },
-            { name: "Home Product 12", price: 1299 },
-          ];
-        } else if (category === "electronics") {
-          products = [
-            { name: "Smartphone", price: 15999 },
-            { name: "Laptop", price: 45999 },
-            { name: "Headphones", price: 2999 },
-            { name: "watch", price: 999 },
-            { name: "SmartWatch", price: 1200 },
-            { name: "Earphone", price: 700 },
-            { name: "Juicer& Mixer", price: 2999 },
-            { name: "Cattle", price: 1999 },
-            { name: "Keyboard", price: 600 },
-            { name: "Charger", price: 459 },
-            { name: "Bulb", price: 129 },
-            { name: "Data Cable", price: 120 },
-          ];
-        } else if (category === "fashion") {
-          products = [
-            { name: "T-Shirt", price: 499 },
-            { name: "Jeans", price: 799 },
-            { name: "Jacket", price: 1999 },
-            { name: "Shoes", price: 2999 },
-            { name: "Hoodies", price: 499 },
-            { name: "Gloves", price: 799 },
-            { name: "Thermals", price: 1999 },
-            { name: "Kurta", price: 2999 },
-            { name: "Shirt", price: 2999 },
-            { name: "Top", price: 1999 },
-            { name: "Lehnga", price: 2999 },
-            { name: "Saree", price: 2999 },
-          ];
-        } else if (category === "groceries") {
-          products = [
-            { name: "Rice", price: 120 },
-            { name: "Wheat Flour", price: 80 },
-            { name: "Sugar", price: 60 },
-            { name: "Milk", price: 40 },
-            { name: "Butter", price: 120 },
-            { name: "Namkeen", price: 80 },
-            { name: "Snacks", price: 60 },
-            { name: "Bread", price: 40 },
-            { name: "Rusk", price: 40 },
-            { name: "Potato", price: 60 },
-            { name: "Tomato", price: 40 },
-            { name: "Almonds", price: 40 },
-          ];
-        }
-
-        products.forEach((product) => {
-          const productElement = document.createElement("div");
-          productElement.classList.add("product");
-          productElement.innerHTML = `
-            <img src="https://via.placeholder.com/200" alt="${product.name}" />
-            <h3>${product.name}</h3>
-            <p>₹${product.price}</p>
-            <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
-            <button onclick="addToWishlist('${product.name}', ${product.price})">Add to Wishlist</button>
-          `;
-          productList.appendChild(productElement);
-        });
-      }
-
-      function addToCart(name, price) {
-        cart.push({ name, price });
-        updateCartCount();
-      }
-
-      function updateCartCount() {
-        document.getElementById("cart-count").innerText = cart.length;
-      }
-
-      function toggleCartModal() {
-        const modal = document.getElementById("cart-modal");
-        modal.style.display = modal.style.display === "flex" ? "none" : "flex";
-        if (modal.style.display === "flex") {
-          displayCartItems();
-        }
-      }
-
-      function displayCartItems() {
-        const cartItemsList = document.getElementById("cart-items");
-        cartItemsList.innerHTML = "";
-
-        cart.forEach((item, index) => {
-          const li = document.createElement("li");
-          li.innerHTML = `${item.name} - ₹${item.price} <button onclick="removeFromCart(${index})">Remove</button>`;
-          cartItemsList.appendChild(li);
-        });
-
-        updateCartTotal();
-      }
-
-      function removeFromCart(index) {
-        cart.splice(index, 1);
-        displayCartItems();
-        updateCartCount();
-      }
-
-      function updateCartTotal() {
-        const cartTotal = document.getElementById("cart-total");
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        cartTotal.innerText = `Total: ₹${total}`;
-      }
-
-      function addToWishlist(name, price) {
-        wishlist.push({ name, price });
-        updateWishlistCount();
-      }
-
-      function updateWishlistCount() {
-        document.getElementById("wishlist-count").innerText = wishlist.length;
-      }
-
-      function toggleWishlistModal() {
-        const modal = document.getElementById("wishlist-modal");
-        modal.style.display = modal.style.display === "flex" ? "none" : "flex";
-        if (modal.style.display === "flex") {
-          displayWishlistItems();
-        }
-      }
-
-      function displayWishlistItems() {
-        const wishlistItems = document.getElementById("wishlist-items");
-        wishlistItems.innerHTML = "";
-
-        wishlist.forEach((item, index) => {
-          const li = document.createElement("li");
-          li.innerHTML = `${item.name} - ₹${item.price} 
-            <button onclick="removeFromWishlist(${index})">Remove</button>
-            <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>`;
-          wishlistItems.appendChild(li);
-        });
-      }
-
-      function removeFromWishlist(index) {
-        wishlist.splice(index, 1);
-        displayWishlistItems();
-        updateWishlistCount();
-      }
-
-      function toggleOrderHistoryModal() {
-        const modal = document.getElementById("order-history-modal");
-        modal.style.display = modal.style.display === "flex" ? "none" : "flex";
-        if (modal.style.display === "flex") {
-          displayOrderHistory();
-        }
-      }
-
-      function displayOrderHistory() {
-        const orderHistoryList = document.getElementById("order-history-list");
-        orderHistoryList.innerHTML = "";
-
-        orders.forEach((order) => {
-          const li = document.createElement("li");
-          li.innerHTML = `Order ID: ${order.orderId} | Date: ${order.date} 
-            <div class="order-status">Status: ${order.status}</div>`;
-          orderHistoryList.appendChild(li);
-        });
-      }
-
-      function openPaymentModal() {
-        const modal = document.getElementById("payment-modal");
-        modal.style.display = "flex";
-      }
-
-      function togglePaymentModal() {
-        const modal = document.getElementById("payment-modal");
-        modal.style.display = "none";
-      }
-
-      function processPayment() {
-        alert("Payment successful!");
-        togglePaymentModal();
-      }
-
-      function openLoginModal() {
-        const modal = document.getElementById("login-modal");
-        modal.style.display = "flex";
-      }
-
-      function toggleLoginModal() {
-        const modal = document.getElementById("login-modal");
-        modal.style.display = "none";
-      }
-
-      function openSignupModal() {
-        const modal = document.getElementById("signup-modal");
-        modal.style.display = "flex";
-      }
-
-      function toggleSignupModal() {
-        const modal = document.getElementById("signup-modal");
-        modal.style.display = "none";
-      }
-
-      function signup() {
-        const username = document.getElementById("signup-username").value;
-        const email = document.getElementById("signup-email").value;
-        const phone = document.getElementById("signup-phone").value;
-        const password = document.getElementById("signup-password").value;
-
-        if (username && email && phone && password) {
-          alert("Sign up successful!");
-          toggleSignupModal();
-        } else {
-          alert("Please fill in all fields.");
-        }
-      }
-
-      function login() {
-        const username = document.getElementById("username").value;
-        const email = document.getElementById("login-email").value;
-        const phone = document.getElementById("login-phone").value;
-        const password = document.getElementById("password").value;
-
-        if (username && email && phone && password) {
-          isLoggedIn = true;
-          userInfo = { username, email, phone };
-          alert("Login successful!");
-          toggleLoginModal();
-        } else {
-          alert("Please fill in all fields.");
-        }
-      }
-
-      // Initialize the home page content
-      showContent("home");
-    </script>
-  </body>
+  <!-- Signup Modal -->
+  <div class="modal" id="signup-modal">
+    <div class="signup-modal-content">
+      <span class="close" onclick="toggleSignupModal()">&times;</span>
+      <h2>Sign Up</h2>
+      <input type="text" id="signup-username" placeholder="Username" />
+      <input type="email" id="signup-email" placeholder="Email" />
+      <input type="text" id="signup-phone" placeholder="Phone Number" />
+      <input type="password" id="signup-password" placeholder="Password" />
+      <button onclick="signup()">Sign Up</button>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
 </html>
